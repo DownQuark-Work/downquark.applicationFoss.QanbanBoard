@@ -1,0 +1,37 @@
+:octocat: 
+#octocat: Headline ##############################
+#    Enable (and add the url if needed) ONE option below
+#  https://
+
+# Description #########################################################
+
+
+# 50-character max subject line
+#   What does this solve
+#   50 hashes are above for width measuerment (takes emoji into account)
+#     Update template-hash line if emoji changes
+#
+# [optional] link to issue (trello / asana / jira / etc)
+#
+# 72-character wrapped longer description.
+#   Bullets acceptible as * or -
+#   72 hashes are above for width measurement
+
+# Consider starting the commit message with an applicable emoji:
+#   🍎 `:apple:` when fixing something on macOS
+#   ⬇️ `:arrow_down:` when downgrading dependencies
+#   ⬆️ `:arrow_up:` when upgrading dependencies
+#   🎨 `:art:` when improving the format/structure of the code
+#   🐛 `:bug:` when fixing a bug
+#   🏁 `:checkered_flag:` when fixing something on Windows
+#   🔥 `:fire:` when removing code or files
+#   💚 `:green_heart:` when fixing the CI build
+#   🔒 `:lock:` when dealing with security
+#   📝 `:memo:` when writing docs
+#   🚱 `:non-potable_water:` when plugging memory leaks
+#   🤓 `:octocat:` when working on feature requests (DEFAULT) [emoji preview unavailable]
+#   🐧 `:penguin:` when fixing something on Linux
+#   ❓ `:question:` when none of the other emoji are applicable - or you are not sure
+#   🐎 `:racehorse:` when improving performance
+#   👕 `:shirt:` when removing linter warnings
+#   🐁 `:mouse:` when adding tests

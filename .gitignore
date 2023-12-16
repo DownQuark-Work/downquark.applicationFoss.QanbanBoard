@@ -1,0 +1,33 @@
+.DS*
+
+# Compiled
+src/assets/styles/css
+exports/.cache/**/
+exports/_deploy/**/
+exports/logs/**/
+validators/flow/flow-typed/stubs/
+
+# Logs
+*.log*
+
+# Modules
+node_modules/
+**/lib/
+
+# Optional cache directories
+.eslintcache
+.npm
+
+# Optional private notes directory
+_notes/.ignored/
+
+# Yarn
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+#   !.yarn/cache for Zero-Installs
+#   .pnp.* for non-Zero-Installs
+!.yarn/cache
+#.pnp.*
