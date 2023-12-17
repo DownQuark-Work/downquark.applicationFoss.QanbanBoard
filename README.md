@@ -91,3 +91,12 @@ Triggered on `git flow release finish` this will append two more command line pr
 1. apply the changelog content to the release
 
 ## phew
+<details><summary>
+
+[wires](https://wireframe.cc/FtcBVG)
+
+</summary>
+
+
+
+</details>
