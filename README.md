@@ -93,10 +93,11 @@ Triggered on `git flow release finish` this will append two more command line pr
 ## phew
 <details><summary>
 
-[wires](https://wireframe.cc/FtcBVG)
+<a href="https://wireframe.cc/FtcBVG" target="_blank">wires</a>
 
 </summary>
 
+<img style="width:80%;margin:0 10%" alt="Screenshot 2023-12-17 at 03 53 03" src="https://github.com/DownQuark-Work/downquark.applicationFoss.QanbanBoard/assets/40064794/c5c1f379-d94a-4d91-92ad-1cf338795f69">
 
 
 </details>
