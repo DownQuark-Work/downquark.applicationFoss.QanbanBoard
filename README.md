@@ -105,4 +105,7 @@ Triggered on `git flow release finish` this will append two more command line pr
 
 [initial erd](https://dbdiagram.io/d/Qanban-65861e2489dea62799702c18)
 
+> the [observer pattern](https://www.patterns.dev/vanilla/observer-pattern) may be the most straight forward solution to capture all `hook` events
+> > with a [tauri backend](https://tauri.app/v1/guides/features/events#global-events-1)
+
 </details>
