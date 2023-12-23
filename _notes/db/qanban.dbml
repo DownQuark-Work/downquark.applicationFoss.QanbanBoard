@@ -1,0 +1,161 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+// // https://dbdiagram.io/d/Qanban-65861e2489dea62799702c18
+
+Project Qanban {
+  Note: '''
+    # Qanban
+    Qanban is a progress oriented task management board.
+
+    ## Benefits
+    
+    - do your work and let the metrics follow
+    - close to fully automated
+  '''
+}
+
+/** Tables */
+Table Qanban.Project {
+  id uuid [pk, note: 'each top-level active repository is assigned a uuid']
+  name varchar(75) [not null]
+  path varchar(200) [note:'path to repository directory on user OS']
+  determined boolean [default: false, note: 'a maximum of only one project is allowed to be determined at a time']
+  created timestamp [default:`now()`]
+  edited timestamp [default:`now()`]
+
+  Note: 'Initial table to populate'
+}
+
+Table Qanban.Progress {
+  id uuid [pk]
+  project_id uuid [ref: > Qanban.Project.id]
+  release_version varchar(12) [default:'0', note: 'this will help when creating release changelogs']
+  progress_type integer [ref: > Qanban.Types_Progress.id]
+  progress_content_id integer [
+    ref: > Qanban.Progress_Develop.id,
+    ref: > Qanban.Progress_Discover.id
+  ]
+  progress_completion_type integer [ref: > Qanban.Types_Progress_Completion.id, note:'defaults to 0 or 1 dependent on `progress_type`']
+
+  Note: '`created` & `edited` values can be found in their respective `Qanban.Progress_(Develop|Discover)` tables'
+}
+
+Table Qanban.Progress_Develop {
+  id integer [pk, increment]
+  creation_type integer [ref: > Qanban.Types_Develop_Creation.id]
+  task_status_type integer [ref: > Qanban.Types_Develop.id, default:0]
+  commit_id integer [default: 'null', ref: - Qanban.Progress_Develop_Commit.id, note:'if null then task was created manually by the user']
+  name varchar(20) [note:'task/ticket name']
+  description varchar(255) [note:'task/ticket issue description']
+  level_of_effort integer [default:3,ref: > Qanban.Quantifier.id] // 3 = SMALL
+  priority integer [default:0,ref: > Qanban.Quantifier.id] // 0 = LOW
+  created timestamp [default:`now()`]
+  edited timestamp [default:`now()`]
+}
+Table Qanban.Progress_Develop_Commit {
+  id integer [pk, increment]
+  commit_type integer [ref: > Qanban.Types_Task_Commit.id]
+  commit_init varchar(64) [unique, not null]
+  commit_active varchar(64) [unique, default: 'null', note:'''
+    This commit is only meant to help ensure consistency.
+    It is the most recent commit created while the issues is still in development.
+    It will be set to null when `commit_complete` is populated
+  ''']
+  commit_complete varchar(64) [unique, default: 'null'] 
+  message varchar(255) [default:'null', note: 'the accompanying message with the most recent commit']
+}
+
+Table Qanban.Progress_Discover {
+  id integer [pk, increment]
+  discover_type integer [ref: > Qanban.Types_Discover.id]
+  name varchar(20) [not null]
+  content varchar(255) [not null]
+  created timestamp [default:`now()`]
+  edited timestamp [default:`now()`]
+
+  NOTE: '''
+    if `discover_type` is BUG or TODO
+      then _name_ and _content_ values will be applied to the
+      applicable `Progress_Develop` fields as well
+    else the fields have no real restictions
+      and could be a link, message, snippet, etc
+  '''
+}
+
+/** Enum maps */
+Table Qanban.Types_Develop {
+  id integer [pk, increment]
+  name Qanban.develop_type
+}
+Table Qanban.Types_Develop_Creation {
+  id integer [pk, increment]
+  name Qanban.develop_creation_type
+}
+Table Qanban.Types_Discover {
+  id integer [pk, increment]
+  name Qanban.discover_type
+}
+Table Qanban.Types_Progress {
+  id integer [pk, increment]
+  name Qanban.progress_type
+}
+Table Qanban.Types_Progress_Completion {
+  id integer [pk, increment]
+  name Qanban.progress_completion_type
+}
+Table Qanban.Types_Task_Commit {
+  id integer [pk, increment]
+  name Qanban.task_commit_type
+}
+Table Qanban.Quantifier {
+  id integer [pk, increment]
+  name Qanban.quantifiers
+}
+
+/** Enums */
+enum Qanban.quantifiers {
+  LOW
+  MEDIUM
+  HIGH
+  SMALL
+  LARGE
+}
+enum Qanban.develop_type { // this coincides with a typical ticket
+  OPEN
+  IN_PROGRESS
+  BLOCKED // todo: figure out this integration
+  COMPLETE
+}
+enum Qanban.develop_creation_type { // _how_ the ticket was opened
+  GIT_FLOW // `git flow feature|hotfix|etc` hook triggered creation
+  MANUAL_QANBAN // user completed form field from qanban board
+  // NOTE: `_QANBAN` included for future scalability
+}
+enum Qanban.discover_type {
+  BUG
+  EXT [note: 'links to external resources']
+  REF [note: 'displayed in the "at-a-glance" section']
+  TODO
+}
+enum Qanban.progress_completion_type { // _how_ the ticket was closed
+  NOT_APPLICABLE // EXT or REF `discover_type`
+  NOT_COMPLETE // new or in progress issue
+  GIT_FLOW // `git flow finish` hook triggered completion
+  MANUAL_QANBAN // user clicked checkbox on the qanban board
+  // NOTE: `_QANBAN` included for future scalability
+}
+enum Qanban.progress_type {
+  DEVELOP
+  DISCOVER [note: 'any non-development type of work']
+}
+enum Qanban.task_commit_type { // this coincides with the `git flow` branching options
+  BUGFIX
+  FEATURE
+  HOTFIX
+  RELEASE
+  SUPPORT
+}
+
+/** Refs */
+// composite example:
+// // Ref: users.(username, role) - posts.(title, status)

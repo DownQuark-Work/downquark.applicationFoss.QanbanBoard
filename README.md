@@ -66,6 +66,8 @@ Following the guidelines of the above will result in something along the lines o
 > NOTE: In the future we will support more types of tagging (like `> |BUG:` for instance).
 > - `> |EXT:` as well. To track your blog posts, forum updates, or even other sites you've found interesting
 
+> NOTE: Whenever a string that matches the `>|\w+:` pattern is created, updated, or deleted, a _hook_ will be triggered. This will persist the change to an actual database so the content and progress will be backed up outside of the user's local OS.
+
 ##### _develop_
 Even more straight forward than _discover_.
 
@@ -73,6 +75,8 @@ Even more straight forward than _discover_.
 1. Each time you run `git flow feature finish` (with or without  `<FEATURE_NAME>`) the _**Qanban Application**_ will mark the "ticket" complete.
 
 Following the `git flow` pattern will result in something along the lines of a sideways `git log --graph`:
+
+> NOTE: As with the _discover_ section above, anytime `git flow <COMMAND>` is called a _hook_ will be triggered. This will persist the change to an actual database so the content and progress will be backed up outside of the user's local OS.
 
 • <img width="203" alt="Screenshot 2023-12-16 at 01 33 18" src="https://github.com/DownQuark-Work/downquark.applicationFoss.QanbanBoard/assets/40064794/2ff4573f-f986-4af1-bdcc-4ab14fac1605">
 
@@ -99,5 +103,6 @@ Triggered on `git flow release finish` this will append two more command line pr
 
 <img style="width:80%;margin:0 10%" alt="Screenshot 2023-12-17 at 03 53 03" src="https://github.com/DownQuark-Work/downquark.applicationFoss.QanbanBoard/assets/40064794/c5c1f379-d94a-4d91-92ad-1cf338795f69">
 
+[initial erd](https://dbdiagram.io/d/Qanban-65861e2489dea62799702c18)
 
 </details>
