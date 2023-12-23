@@ -104,6 +104,7 @@ Triggered on `git flow release finish` this will append two more command line pr
 <img style="width:80%;margin:0 10%" alt="Screenshot 2023-12-17 at 03 53 03" src="https://github.com/DownQuark-Work/downquark.applicationFoss.QanbanBoard/assets/40064794/c5c1f379-d94a-4d91-92ad-1cf338795f69">
 
 [initial erd](https://dbdiagram.io/d/Qanban-65861e2489dea62799702c18)
+> db added to maria instances. viewable on port 3366
 
 > the [observer pattern](https://www.patterns.dev/vanilla/observer-pattern) may be the most straight forward solution to capture all `hook` events
 > > with a [tauri backend](https://tauri.app/v1/guides/features/events#global-events-1)
