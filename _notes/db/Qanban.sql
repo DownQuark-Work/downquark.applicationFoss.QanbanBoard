@@ -1,3 +1,4 @@
+DROP SCHEMA IF EXISTS `dq_devqon_qanban`;
 CREATE SCHEMA `dq_devqon_qanban`;
 
 CREATE TABLE `dq_devqon_qanban`.`Project` (
@@ -81,7 +82,7 @@ CREATE TABLE `dq_devqon_qanban`.`Types_Task_Commit` (
   `name` ENUM ('BUGFIX', 'FEATURE', 'HOTFIX', 'RELEASE', 'SUPPORT')
 );
 
-CREATE TABLE `dq_devqon_qanban`.`Quantifier` (
+CREATE TABLE `dq_devqon_qanban`.`Types_Quantifier` (
   `id` integer PRIMARY KEY AUTO_INCREMENT,
   `name` ENUM ('LOW', 'MEDIUM', 'HIGH', 'SMALL', 'LARGE')
 );
@@ -112,9 +113,9 @@ ALTER TABLE `dq_devqon_qanban`.`Progress_Develop` ADD FOREIGN KEY (`task_status_
 
 ALTER TABLE `dq_devqon_qanban`.`Progress_Develop` ADD FOREIGN KEY (`commit_id`) REFERENCES `dq_devqon_qanban`.`Progress_Develop_Commit` (`id`);
 
-ALTER TABLE `dq_devqon_qanban`.`Progress_Develop` ADD FOREIGN KEY (`level_of_effort`) REFERENCES `dq_devqon_qanban`.`Quantifier` (`id`);
+ALTER TABLE `dq_devqon_qanban`.`Progress_Develop` ADD FOREIGN KEY (`level_of_effort`) REFERENCES `dq_devqon_qanban`.`Types_Quantifier` (`id`);
 
-ALTER TABLE `dq_devqon_qanban`.`Progress_Develop` ADD FOREIGN KEY (`priority`) REFERENCES `dq_devqon_qanban`.`Quantifier` (`id`);
+ALTER TABLE `dq_devqon_qanban`.`Progress_Develop` ADD FOREIGN KEY (`priority`) REFERENCES `dq_devqon_qanban`.`Types_Quantifier` (`id`);
 
 ALTER TABLE `dq_devqon_qanban`.`Progress_Develop_Commit` ADD FOREIGN KEY (`commit_type`) REFERENCES `dq_devqon_qanban`.`Types_Task_Commit` (`id`);
 

@@ -47,8 +47,8 @@ Table Qanban.Progress_Develop {
   commit_id integer [default: 'null', ref: - Qanban.Progress_Develop_Commit.id, note:'if null then task was created manually by the user']
   name varchar(20) [note:'task/ticket name']
   description varchar(255) [note:'task/ticket issue description']
-  level_of_effort integer [default:3,ref: > Qanban.Quantifier.id] // 3 = SMALL
-  priority integer [default:0,ref: > Qanban.Quantifier.id] // 0 = LOW
+  level_of_effort integer [default:3,ref: > Qanban.Types_Quantifier.id] // 3 = SMALL
+  priority integer [default:0,ref: > Qanban.Types_Quantifier.id] // 0 = LOW
   created timestamp [default:`now()`]
   edited timestamp [default:`now()`]
 }
@@ -107,7 +107,7 @@ Table Qanban.Types_Task_Commit {
   id integer [pk, increment]
   name Qanban.task_commit_type
 }
-Table Qanban.Quantifier {
+Table Qanban.Types_Quantifier {
   id integer [pk, increment]
   name Qanban.quantifiers
 }
