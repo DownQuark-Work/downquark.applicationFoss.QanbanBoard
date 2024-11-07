@@ -11,6 +11,19 @@ To be as efficient, automated, and simple-to-use we are assuming the following:
 
 > _**CAVEAT**_: it is important to note that the repositories do not have to have an online presence and can exist _solely_ on your computer's file system.
 
+> NOTE: a TLDR; of what will be mentioned below.
+> You develop - this takes care of the admin.
+> - at any time (or on PR/`feature finish`, cronjob?, etc) the githubQL will query the git logs and changes back to the previous time it was run (or whatever the user specifies).
+> -  AI will then create a changelog/summary/etc.
+> - integrations with trello/gh/etc
+> - but _the_ board is updated, automatically, with your work. all the benefits of a qanban board, without the tedium that makes me never use a qanban board.
+> ---
+> to extend this, there could be a paid? feature where freelancers could schedule set times for the summaries to be generated and then sent to their clients. keeping everyone in the loop automatically. 
+> - What's more, thes generated summaries will be easily accessed from the overview of the qanban board. attached to individual cards, or projects, or etc.
+> - users can adjsut and/or interact AI again to further refine the summary and send it off to clients/bosses/etc.
+> -
+
+
 ## flow
 > Described in high level terms. More granular updates to follow as the build proceeds.
 
